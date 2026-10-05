@@ -41,6 +41,7 @@ Include any commands you intend to run that have side effects. Wait for my confi
 - For approved Skills, use the installed Skill Creator capabilities if available (draft, test with the planned trigger/near-miss prompts, tune the description). If it is not available, follow the current documentation's Skill format and say so.
 - Keep every instruction short and non-duplicated. Reference documentation by path rather than copying it.
 - Keep scripts cross-platform (or provide a note about which OS they support), deterministic, free of secrets, and with clear failure output.
+- On Windows, avoid shell-specific syntax in hook commands and scripts, write files with consistent line endings per the repository settings, and keep paths short.
 - Hooks: cheap, non-blocking unless the design says otherwise, with explicit timeouts and a safe failure mode.
 - Agents and MCP changes: exactly as approved, with minimal tools.
 

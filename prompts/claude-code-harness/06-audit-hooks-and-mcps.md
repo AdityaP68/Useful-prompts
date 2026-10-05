@@ -82,6 +82,7 @@ Only where history shows repeated retrieval pain that scripts and built-in tools
 - anything that sends data to external services
 - configuration that would break or leak when shared with other developers
 - Windows/macOS/Linux compatibility of hook commands and server launchers
+  (on native Windows check the shell used to run hooks, `.sh` scripts, launcher wrappers such as `cmd /c`, quoting rules, and CRLF line endings)
 
 ## Output
 

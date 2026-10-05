@@ -15,6 +15,7 @@ You are analyzing how Claude Code has actually been used on `<PROJECT>` to find 
 - Do NOT treat Claude's past statements as true. They are evidence of *what was done*, not of how the code works.
 - Do NOT create abstractions from one-off events. Every finding needs a frequency and a time spread.
 - Use a cross-platform approach (for example a small Python script using only the standard library). Do not rely on shell tools that are missing on other operating systems.
+- On Windows, normalize path separators and drive letters, compare paths case-insensitively, open files as UTF-8, and confirm which environment (native or WSL) owns the history being analyzed.
 
 ## Step 0 — Locate and characterize history
 

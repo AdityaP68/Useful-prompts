@@ -107,6 +107,20 @@ Run 10 once on the baseline (before 08) and again after 09's fixes are applied.
 - Every prompt tells Claude to **inspect the installed Claude Code version and its documentation** before relying on any construct, because file locations, hook events, settings keys and available slash commands change between versions.
 - Shell commands in prompts are described in terms of intent. Use whatever works on your OS (macOS, Linux, Windows). A small cross-platform script (for example Python) is preferred over shell pipelines for history analysis.
 
+## Windows notes
+
+The pack is written to run on Windows, macOS and Linux. If you run it on Windows:
+
+- **Native vs WSL.** Decide whether Claude Code runs natively (PowerShell/cmd/Git Bash) or inside WSL. They have separate home directories, separate `~/.claude` locations and separate session history. Audit the environment you actually use, and tell Claude which one it is at the start. If you use both, run the pack once per environment.
+- **Locations.** Where the prompts say `~/.claude`, on native Windows that is under your user profile (`%USERPROFILE%\.claude` in cmd, `$env:USERPROFILE\.claude` in PowerShell). Prompt 01 makes Claude verify the real locations from the installed version's documentation rather than assume.
+- **Scripts.** Prompt 02 asks Claude to write a small analysis script. Ask for Python using only the standard library, and run it with whichever launcher you have (`python` or `py`). Avoid `grep`, `awk` and `find` pipelines unless you know they exist on your shell.
+- **Paths.** Reports use `<WORKSPACE>`-relative paths with forward slashes. Scripts should normalize backslashes and drive-letter prefixes and be case-insensitive when comparing paths.
+- **Hooks and MCP launchers.** Prompt 06 checks that hook commands and server launchers work on your shell (for example `npx`-style launchers sometimes need a `cmd /c` wrapper on native Windows, and shell scripts need a shell that can run them). Verify against the current documentation.
+- **Line endings.** Check Git's `core.autocrlf` and any `.gitattributes` before generating files with scripts, so that new configuration and scripts do not produce noisy diffs or break shell scripts with CRLF endings.
+- **Long paths and locks.** Deep `node_modules` or build trees can hit path-length limits. Exclude them from analysis. Antivirus or editors holding files open can break moves and deletes; prompt 08 prefers copying to a backup before modifying.
+- **Worktrees for benchmarks.** Prompt 10 uses a scratch branch or worktree. Use a short path (for example directly under a drive root or a short folder in your profile) to avoid long-path problems.
+- **Permissions.** Run Claude Code as a normal user, not elevated. None of the prompts need administrator rights.
+
 ## Privacy and sharing
 
 Session history can contain source code, secrets and other sensitive content. The prompts instruct Claude to aggregate locally, never print raw transcript content unnecessarily, and redact before anything is shared. Reports saved in `<AUDIT_DIR>` may still contain identifiers from your environment. Sanitize them before publishing or pasting them anywhere.

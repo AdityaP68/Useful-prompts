@@ -18,6 +18,7 @@ You are auditing the Claude Code configuration that actually exists on this mach
 ## Step 0 — Establish what this Claude Code version supports
 
 1. Determine the installed Claude Code version and OS.
+   Also determine whether it runs natively or under a compatibility layer such as WSL (on Windows), and which shell it uses; each has its own home directory and configuration locations. Audit only the environment in use and note the other as out of scope.
 2. Consult the installed CLI help and the current official Claude Code documentation (and in-app commands such as those that report memory, context, hooks, MCP servers, agents, permissions and diagnostics, where they exist in this version).
 3. Write down which construct types and file locations this version actually supports, and which settings keys and hook events it recognizes. Everything below is a checklist of *things to look for*; if this version supports additional constructs, audit those too. If something on the checklist does not exist in this version, say so.
 
