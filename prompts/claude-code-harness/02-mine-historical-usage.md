@@ -5,6 +5,24 @@
 
 ---
 
+HARNESS WORKFLOW  
+Prompt ID: H02  
+Phase: Historical Usage Mining  
+Previous Major Phase: H01 — Inventory Existing Constructs  
+Next Major Phase: H03 — Context Hierarchy Design  
+Primary artifact: <AUDIT_DIR>/02-history-findings.md  
+
+This prompt was manually copied from an external prompt library.  
+Do not assume that library or its filenames are available in this environment.  
+The Prompt ID is a logical workflow identifier, not a local file path.  
+In the text below, "prompt NN" means harness phase HNN, and AUDIT_DIR is the  
+harness artifact root (a folder outside every repository). Earlier phases, if any,  
+left their results there; inspect those artifacts, not any external files.  
+When this phase is finished, end your final message with:  
+"H02 complete. Recommended next operation: HCHECK - Phase Completeness Check."  
+
+---
+
 You are analyzing how Claude Code has actually been used on `<PROJECT>` to find repeated work, waste and candidate abstractions. Evidence comes first; opinions come last.
 
 ## Rules

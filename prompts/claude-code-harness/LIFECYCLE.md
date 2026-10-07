@@ -21,12 +21,14 @@ No tooling is needed for either.
 
 | Prompt | Maturity |
 |---|---|
-| 01 Inventory existing constructs | TESTED |
-| 02 – 10 major prompts | DRAFT |
-| Helpers | DRAFT |
-| RUNBOOK | DRAFT |
+| H01 Inventory Existing Constructs | TESTED |
+| H02 – H10 major prompts | DRAFT |
+| Helpers (HCHECK … HNEXT) | DRAFT |
+| RUNBOOK, PROMPT-CATALOG, PROTOCOL | DRAFT |
 
-Maturity labels are recorded only in this table, **not inside the prompt files**, so promoting a prompt never changes its text. Promote by editing this table once the criteria above are met (for example 01 becomes PROVEN once phase 02 has successfully consumed its output). Execution details of any private run are intentionally not recorded in this repository.
+Maturity labels are recorded only in this table, **not inside the prompt files**, so promoting a prompt never changes its text. Promote by editing this table once the criteria above are met (for example H01 becomes PROVEN once H02 has successfully consumed its output). Execution details of any private run are intentionally not recorded in this repository.
+
+**Note on the self-identification header.** Every major prompt, H01 included, carries a short `HARNESS WORKFLOW` metadata header (prompt ID, phase name, previous/next phase, primary artifact, and a note that the prompt was copied from an external library). It was added for portability between the public library and a separate private environment (see [PROTOCOL.md](PROTOCOL.md)). It is metadata only: no instruction in the prompt bodies was changed, and removing the inserted block restores each file exactly. It does not reset maturity.
 
 ### Changing a TESTED or PROVEN prompt
 
@@ -47,44 +49,34 @@ A prompt that has been successfully exercised is not rewritten for style, consis
 
 Treat these as a contract; changing them is a compatibility impact.
 
-- Report file names: `01-inventory.md`, `02-history-findings.md`, `03-hierarchy.md`, `04-skill-candidates.md`, `05-subagent-candidates.md`, `06-hooks-and-mcps.md`, `07-harness-design.md`, `08-implementation-report.md`, `09-review.md`, `10-benchmark/report.md`, all under `AUDIT_DIR`.
-- Their required section lists, as specified in each prompt's "Output" section.
-- Helper-created files: `handoff/<NN>-handoff.md`, `handoff/09-review-brief.md`, `07-approvals.md`, `09-decisions.md`, `STATUS.md`, `10-benchmark/runs/`, `10-benchmark/runs-index.md`.
+- **Logical IDs** (`H01`–`H10`, `HCHECK` … `HNEXT`): never reused, never renumbered. File names may change; only the catalog row does.
+- Private report names: `01-inventory.md`, `02-history-findings.md`, `03-hierarchy.md`, `04-skill-candidates.md`, `05-subagent-candidates.md`, `06-hooks-and-mcps.md`, `07-harness-design.md`, `08-implementation-report.md`, `09-review.md`, `10-benchmark/report.md`, all under `AUDIT_DIR`.
+- Their required section lists, as specified in each prompt's "Output" section and mirrored in HCHECK's expected-contents list.
+- Helper-created private files: the workflow-state file (`STATE.md` or an existing equivalent), `handoff/<NN>-handoff.md`, `handoff/<NN>-checkpoint.md`, `handoff/<NN>-recovery-gaps.md`, `handoff/09-review-brief.md`, `07-approvals.md`, `09-decisions.md`, `10-benchmark/runs/`, `10-benchmark/runs-index.md`.
+- The embedded phase table, headers and workflow-state fields in [PROTOCOL.md](PROTOCOL.md), which are copied into helpers.
 - Placeholder names: `AUDIT_DIR`, `WORKSPACE`, `REPOSITORY` and the others used throughout.
 
 ---
 
 ## 2. Run status (local, not in Git)
 
-Track your own progress in `AUDIT_DIR/STATUS.md`. `AUDIT_DIR` is outside every repository and must never be committed or shared, because it holds your real findings.
+Your own progress is tracked in the **private** artifact root (`AUDIT_DIR`), never in this repository. `AUDIT_DIR` is outside every repository and must never be committed or shared, because it holds your real findings.
 
 | Status | Meaning |
 |---|---|
 | **NOT STARTED** | The phase has not been run. |
-| **IN PROGRESS** | Running, or checkpointed mid-phase. |
-| **COMPLETED** | The phase finished, the Completeness Check returned COMPLETE, and the report and handoff are frozen on disk. |
-| **VALIDATED** | A Fresh Session Recovery Test returned SUFFICIENT for 01–07 (for 08: review 09 found no unresolved CRITICAL/HIGH items; for 09: you triaged every finding; for 10: results were reviewed and the benchmark can be re-run). Only a human sets this. |
+| **IN PROGRESS** | Running, or checkpointed mid-phase (HCHECKPOINT). |
+| **COMPLETED** | The phase finished, HCHECK returned COMPLETE, and the artifact, handoff and workflow state are frozen on disk (HFREEZE). |
+| **VALIDATED** | A fresh-session recovery test (HRECOVER) returned SUFFICIENT. For H08, read it as "H09 found no unresolved CRITICAL/HIGH items"; for H09, "you triaged every finding"; for H10, "results were reviewed and the benchmark can be re-run". |
 
-### Local status file
+### The workflow-state file (a contract, not a repository file)
 
-Create `AUDIT_DIR/STATUS.md` like this (replace nothing in the repository, this is a local file):
+The private environment keeps **one** tiny workflow-state file so any new session can recover the position without this repository and without the old conversation. Helpers create `STATE.md` if nothing equivalent exists, and **detect and use an existing equivalent** (for example a session log that already records harness phases) instead of creating a competing file. The exact fields are defined in [PROTOCOL.md](PROTOCOL.md#5-workflow-state-contract):
 
-```markdown
-# Harness run status
-
-| Phase | Status | Artifacts | Recovery test | Notes |
-|---|---|---|---|---|
-| 01 Inventory | NOT STARTED | | | |
-| 02 History mining | NOT STARTED | | | |
-| 03 Hierarchy | NOT STARTED | | | |
-| 04 Skills | NOT STARTED | | | |
-| 05 Subagents | NOT STARTED | | | |
-| 06 Hooks and MCPs | NOT STARTED | | | |
-| 07 Harness design | NOT STARTED | | | approvals: not recorded |
-| 10 Baseline round | NOT STARTED | | | |
-| 08 Implement P0 | NOT STARTED | | | |
-| 09 Review | NOT STARTED | | | |
-| 10 Harness round | NOT STARTED | | | |
+```text
+Current major phase / Last completed major phase / Status / Last operation /
+Next operation / Next major phase / Next session / Primary artifact / Handoff /
+Blocking items / Last updated
 ```
 
-The Freeze helper updates the Status and Notes columns to COMPLETED / IN PROGRESS; you set VALIDATED after the recovery test. If `STATUS.md` and the files in `AUDIT_DIR` disagree, trust the files; the [What Should I Do Next?](helpers/what-next.md) helper checks this.
+It records operational state only: it is not a knowledge base, a conversation summary or a history. HCHECK, HFREEZE, HCHECKPOINT, HRECOVER, HREPAIR and HREVIEW update it; HNEXT only reads it. You do not create it by hand. If it disagrees with the artifacts that actually exist, the artifacts win, and HNEXT reports the disagreement.

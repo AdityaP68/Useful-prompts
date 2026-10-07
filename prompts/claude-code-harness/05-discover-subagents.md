@@ -5,6 +5,24 @@
 
 ---
 
+HARNESS WORKFLOW  
+Prompt ID: H05  
+Phase: Subagent Discovery  
+Previous Major Phase: H04 — Skill Discovery  
+Next Major Phase: H06 — Hooks and MCP Audit  
+Primary artifact: <AUDIT_DIR>/05-subagent-candidates.md  
+
+This prompt was manually copied from an external prompt library.  
+Do not assume that library or its filenames are available in this environment.  
+The Prompt ID is a logical workflow identifier, not a local file path.  
+In the text below, "prompt NN" means harness phase HNN, and AUDIT_DIR is the  
+harness artifact root (a folder outside every repository). Earlier phases, if any,  
+left their results there; inspect those artifacts, not any external files.  
+When this phase is finished, end your final message with:  
+"H05 complete. Recommended next operation: HCHECK - Phase Completeness Check."  
+
+---
+
 Decide which subagents, if any, `<PROJECT>` needs. The default answer is **none**. Do NOT invent generic agents (for example "code reviewer", "debugger", "architect") because they sound useful.
 
 ## Rules

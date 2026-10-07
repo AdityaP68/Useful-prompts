@@ -5,6 +5,24 @@
 
 ---
 
+HARNESS WORKFLOW  
+Prompt ID: H03  
+Phase: Context Hierarchy Design  
+Previous Major Phase: H02 — Historical Usage Mining  
+Next Major Phase: H04 — Skill Discovery  
+Primary artifact: <AUDIT_DIR>/03-hierarchy.md  
+
+This prompt was manually copied from an external prompt library.  
+Do not assume that library or its filenames are available in this environment.  
+The Prompt ID is a logical workflow identifier, not a local file path.  
+In the text below, "prompt NN" means harness phase HNN, and AUDIT_DIR is the  
+harness artifact root (a folder outside every repository). Earlier phases, if any,  
+left their results there; inspect those artifacts, not any external files.  
+When this phase is finished, end your final message with:  
+"H03 complete. Recommended next operation: HCHECK - Phase Completeness Check."  
+
+---
+
 Design where each kind of knowledge and instruction for `<PROJECT>` should live, using this hierarchy:
 
 ```

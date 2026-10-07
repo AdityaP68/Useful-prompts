@@ -5,6 +5,24 @@
 
 ---
 
+HARNESS WORKFLOW  
+Prompt ID: H07  
+Phase: Native Harness Synthesis  
+Previous Major Phase: H06 — Hooks and MCP Audit  
+Next Major Phase: Human approval of the P0 items, then H10 — Harness Benchmark (baseline round), then H08 — P0 Implementation  
+Primary artifact: <AUDIT_DIR>/07-harness-design.md  
+
+This prompt was manually copied from an external prompt library.  
+Do not assume that library or its filenames are available in this environment.  
+The Prompt ID is a logical workflow identifier, not a local file path.  
+In the text below, "prompt NN" means harness phase HNN, and AUDIT_DIR is the  
+harness artifact root (a folder outside every repository). Earlier phases, if any,  
+left their results there; inspect those artifacts, not any external files.  
+When this phase is finished, end your final message with:  
+"H07 complete. Recommended next operation: HCHECK - Phase Completeness Check."  
+
+---
+
 Combine the findings of prompts 01–06 into one coherent, minimal **Claude-native** harness design for `<PROJECT>`. Then stop: a human reviews this design before anything is implemented.
 
 ## Primary optimization target

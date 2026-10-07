@@ -101,11 +101,13 @@ Run 10 once on the baseline (before 08) and again after 09's fixes are applied.
 
 ## Operating it manually
 
-If you run these prompts by copying them from GitHub into Claude Code by hand, start with [RUNBOOK.md](RUNBOOK.md). It gives, for each major prompt, what must exist before you run it, which session to use, what to watch for, when it is done, and what to do next. It links to the major prompts rather than repeating them.
+If you run these prompts by copying them from GitHub into Claude Code by hand, note that **this library and your Claude Code environment are separate**: the private Claude cannot open anything here. Every prompt therefore carries a stable **logical ID** (`H01`…`H10` for the major phases, `HCHECK`, `HFREEZE`, … for helpers), and the phases communicate through private artifacts the prompts create in your environment. Claude says "run HCHECK"; you look it up in the catalog and copy that file.
 
-- [RUNBOOK.md](RUNBOOK.md): step-by-step manual operation, session boundaries, the freeze / recovery-test gate between phases
-- [helpers/](helpers/README.md): short copy/paste prompts for the gaps between the major prompts (completeness check, freeze, recovery test, guardrails, and so on)
-- [LIFECYCLE.md](LIFECYCLE.md): prompt maturity (DRAFT / TESTED / PROVEN), how to change proven prompts, and how to track your own run status locally
+- **[PROMPT-CATALOG.md](PROMPT-CATALOG.md): start here.** Every ID with its GitHub file, order, session, and the workflow map
+- [RUNBOOK.md](RUNBOOK.md): step-by-step manual operation, session boundaries, the check → freeze → recovery-test gate between phases
+- [helpers/](helpers/README.md): short copy/paste prompts for the gaps between the major prompts
+- [PROTOCOL.md](PROTOCOL.md): how IDs, self-identification headers, phase auto-detection and the workflow-state contract work
+- [LIFECYCLE.md](LIFECYCLE.md): prompt maturity (DRAFT / TESTED / PROVEN), how to change proven prompts, and local status tracking
 - [PROPOSED-CHANGES.md](PROPOSED-CHANGES.md): suggested edits to major prompts, not applied
 
 ## Shared conventions

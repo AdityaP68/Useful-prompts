@@ -26,12 +26,6 @@ Remove an entry once its change has been tested and promoted, or if it is reject
 
 **COMPATIBILITY IMPACT:** Documentation-only. No output files or sections change. Current workaround: the runbook's "Manual flow" under Prompt 10.
 
-## PC-3: Prompts 02–09 should state how `AUDIT_DIR` is bound in a new session
+## Resolved
 
-**Prompts:** 02 through 09.
-
-**PROPOSED CHANGE:** Add one line to each prompt's header: "If `AUDIT_DIR` is not stated in this session, ask me for it before reading or writing anything."
-
-**WHY:** These prompts read earlier reports from `AUDIT_DIR`, and they are designed to run in fresh sessions where the placeholder has no value. Prompt 01 already asks for it.
-
-**COMPATIBILITY IMPACT:** Additive, one line per prompt, no semantic change. Current workaround: the session-start preamble in the runbook.
+- **Binding `AUDIT_DIR` and resolving cross-references in a fresh session** (formerly PC-3). Resolved without changing any prompt body: the metadata header now inserted at the top of every major prompt tells private Claude that `AUDIT_DIR` is the harness artifact root, that "prompt NN" means phase `HNN`, and that no external library is available. See [PROTOCOL.md](PROTOCOL.md).

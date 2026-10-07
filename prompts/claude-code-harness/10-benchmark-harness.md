@@ -5,6 +5,25 @@
 
 ---
 
+HARNESS WORKFLOW  
+Prompt ID: H10  
+Phase: Harness Benchmark  
+Previous Major Phase: H07 — Native Harness Synthesis (baseline round) or H09 — Adversarial Review (harness round)  
+Next Major Phase: NONE (a human decides what to keep, simplify or remove)  
+Primary artifact: <AUDIT_DIR>/10-benchmark/report.md  
+This prompt is used twice: a baseline round before H08, and a harness round after H09's fixes.  
+
+This prompt was manually copied from an external prompt library.  
+Do not assume that library or its filenames are available in this environment.  
+The Prompt ID is a logical workflow identifier, not a local file path.  
+In the text below, "prompt NN" means harness phase HNN, and AUDIT_DIR is the  
+harness artifact root (a folder outside every repository). Earlier phases, if any,  
+left their results there; inspect those artifacts, not any external files.  
+When this phase is finished, end your final message with:  
+"H10 complete. Recommended next operation: HCHECK - Phase Completeness Check."  
+
+---
+
 Design and run a before/after comparison of the harness on **representative real engineering tasks**. Run it once as a baseline (before prompt 08, or with the new configuration disabled) and once after the harness is implemented and reviewed. This prompt can be used repeatedly as the harness evolves.
 
 ## Primary metric

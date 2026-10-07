@@ -5,6 +5,24 @@
 
 ---
 
+HARNESS WORKFLOW  
+Prompt ID: H01  
+Phase: Inventory Existing Constructs  
+Previous Major Phase: NONE  
+Next Major Phase: H02 — Historical Usage Mining  
+Primary artifact: <AUDIT_DIR>/01-inventory.md  
+
+This prompt was manually copied from an external prompt library.  
+Do not assume that library or its filenames are available in this environment.  
+The Prompt ID is a logical workflow identifier, not a local file path.  
+In the text below, "prompt NN" means harness phase HNN, and AUDIT_DIR is the  
+harness artifact root (a folder outside every repository). Earlier phases, if any,  
+left their results there; inspect those artifacts, not any external files.  
+When this phase is finished, end your final message with:  
+"H01 complete. Recommended next operation: HCHECK - Phase Completeness Check."  
+
+---
+
 You are auditing the Claude Code configuration that actually exists on this machine for `<PROJECT>`. Inspect the real environment before making any recommendation. Do not assume Claude Code behaves the way you remember; verify.
 
 ## Rules

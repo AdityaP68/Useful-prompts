@@ -5,6 +5,24 @@
 
 ---
 
+HARNESS WORKFLOW  
+Prompt ID: H06  
+Phase: Hooks and MCP Audit  
+Previous Major Phase: H05 — Subagent Discovery  
+Next Major Phase: H07 — Native Harness Synthesis  
+Primary artifact: <AUDIT_DIR>/06-hooks-and-mcps.md  
+
+This prompt was manually copied from an external prompt library.  
+Do not assume that library or its filenames are available in this environment.  
+The Prompt ID is a logical workflow identifier, not a local file path.  
+In the text below, "prompt NN" means harness phase HNN, and AUDIT_DIR is the  
+harness artifact root (a folder outside every repository). Earlier phases, if any,  
+left their results there; inspect those artifacts, not any external files.  
+When this phase is finished, end your final message with:  
+"H06 complete. Recommended next operation: HCHECK - Phase Completeness Check."  
+
+---
+
 Audit and design the hooks and MCP servers for `<PROJECT>`. Keep both surfaces small.
 
 ## Rules

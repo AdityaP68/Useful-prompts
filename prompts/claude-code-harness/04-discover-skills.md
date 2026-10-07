@@ -5,6 +5,24 @@
 
 ---
 
+HARNESS WORKFLOW  
+Prompt ID: H04  
+Phase: Skill Discovery  
+Previous Major Phase: H03 — Context Hierarchy Design  
+Next Major Phase: H05 — Subagent Discovery  
+Primary artifact: <AUDIT_DIR>/04-skill-candidates.md  
+
+This prompt was manually copied from an external prompt library.  
+Do not assume that library or its filenames are available in this environment.  
+The Prompt ID is a logical workflow identifier, not a local file path.  
+In the text below, "prompt NN" means harness phase HNN, and AUDIT_DIR is the  
+harness artifact root (a folder outside every repository). Earlier phases, if any,  
+left their results there; inspect those artifacts, not any external files.  
+When this phase is finished, end your final message with:  
+"H04 complete. Recommended next operation: HCHECK - Phase Completeness Check."  
+
+---
+
 Identify the Skills that `<PROJECT>` genuinely needs, using the installed Skill Creator capabilities where available. Skills must be derived **primarily from repeated historical workflows**, not invented.
 
 ## Rules

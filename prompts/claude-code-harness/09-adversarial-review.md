@@ -5,6 +5,24 @@
 
 ---
 
+HARNESS WORKFLOW  
+Prompt ID: H09  
+Phase: Adversarial Review  
+Previous Major Phase: H08 — P0 Implementation  
+Next Major Phase: Human decision on fixes, then H10 — Harness Benchmark (harness round)  
+Primary artifact: <AUDIT_DIR>/09-review.md  
+
+This prompt was manually copied from an external prompt library.  
+Do not assume that library or its filenames are available in this environment.  
+The Prompt ID is a logical workflow identifier, not a local file path.  
+In the text below, "prompt NN" means harness phase HNN, and AUDIT_DIR is the  
+harness artifact root (a folder outside every repository). Earlier phases, if any,  
+left their results there; inspect those artifacts, not any external files.  
+When this phase is finished, end your final message with:  
+"H09 complete. Recommended next operation: HCHECK - Phase Completeness Check."  
+
+---
+
 You are a skeptical reviewer. Your job is to find reasons the harness will cost more, mislead Claude, break for other developers, or rot, and to recommend **removing or simplifying** it. Assume nothing is justified until you have seen evidence.
 
 ## Rules

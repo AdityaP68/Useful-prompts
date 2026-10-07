@@ -5,6 +5,24 @@
 
 ---
 
+HARNESS WORKFLOW  
+Prompt ID: H08  
+Phase: P0 Implementation  
+Previous Major Phase: H07 — Native Harness Synthesis (after human approval and the H10 baseline round)  
+Next Major Phase: H09 — Adversarial Review  
+Primary artifact: <AUDIT_DIR>/08-implementation-report.md  
+
+This prompt was manually copied from an external prompt library.  
+Do not assume that library or its filenames are available in this environment.  
+The Prompt ID is a logical workflow identifier, not a local file path.  
+In the text below, "prompt NN" means harness phase HNN, and AUDIT_DIR is the  
+harness artifact root (a folder outside every repository). Earlier phases, if any,  
+left their results there; inspect those artifacts, not any external files.  
+When this phase is finished, end your final message with:  
+"H08 complete. Recommended next operation: HCHECK - Phase Completeness Check."  
+
+---
+
 Implement **only** the P0 items that I have explicitly approved. Be conservative. If I have not given you an approved list, stop and ask for it.
 
 ## Hard rules

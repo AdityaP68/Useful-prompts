@@ -1,39 +1,30 @@
 # Helper Prompts
 
-Short copy/paste prompts for the operational gaps *between* the major phase prompts. They are optional for you but the [runbook](../RUNBOOK.md) tells you exactly when each one applies. They never replace or modify a major prompt.
+Short copy/paste prompts for the operational gaps *between* the major phase prompts. The master list, with links and the workflow map, is [PROMPT-CATALOG.md](../PROMPT-CATALOG.md); the [runbook](../RUNBOOK.md) says when each applies.
 
-Open the file on GitHub, copy the block under **Copy/Paste Prompt**, fill in the variables at the top of the block, and paste it into Claude Code.
+Open a file here, copy the block under **Copy/Paste Prompt**, and paste it into Claude Code. Most helpers need **no editing**: they identify themselves, detect the current phase from the private harness artifacts, and ask you only if detection fails.
 
-| Helper | File | Session | Mutation |
-|---|---|---|---|
-| A + E. Freeze Phase / Pre-Clear Checkpoint | [freeze-or-checkpoint.md](freeze-or-checkpoint.md) | SAME | ARTIFACTS ONLY |
-| B. Phase Completeness Check | [phase-completeness-check.md](phase-completeness-check.md) | SAME | NONE |
-| C. Fresh Session Recovery Test | [fresh-session-recovery-test.md](fresh-session-recovery-test.md) | NEW | NONE |
-| D. Repair Handoff | [repair-handoff.md](repair-handoff.md) | ORIGINAL or NEW | ARTIFACTS ONLY |
-| F. Stop Scope Creep, G. Diagnostic Only | [guardrails.md](guardrails.md) | SAME / EITHER | NONE |
-| H. Safe Historical Analysis | [safe-historical-analysis.md](safe-historical-analysis.md) | EITHER | ARTIFACTS ONLY |
-| I. Construct Evaluator | [construct-evaluator.md](construct-evaluator.md) | EITHER | NONE |
-| J. Record Benchmark | [record-benchmark.md](record-benchmark.md) | NEW (or SAME) | ARTIFACTS ONLY |
-| K. Independent Review Handoff | [independent-review-handoff.md](independent-review-handoff.md) | SAME | ARTIFACTS ONLY |
-| L. What Should I Do Next? | [what-next.md](what-next.md) | EITHER | NONE |
+| ID | Name | File | Session | Mutation |
+|---|---|---|---|---|
+| HCHECK | Phase Completeness Check | [phase-completeness-check.md](phase-completeness-check.md) | SAME | ARTIFACTS ONLY (state file) |
+| HFREEZE | Freeze Current Phase | [freeze-phase.md](freeze-phase.md) | SAME | ARTIFACTS ONLY |
+| HCHECKPOINT | Pre-Clear / Pre-Compaction Checkpoint | [checkpoint.md](checkpoint.md) | SAME | ARTIFACTS ONLY |
+| HRECOVER | Fresh Session Recovery Test | [fresh-session-recovery-test.md](fresh-session-recovery-test.md) | NEW | ARTIFACTS ONLY (verdict) |
+| HREPAIR | Repair Handoff | [repair-handoff.md](repair-handoff.md) | original or NEW | ARTIFACTS ONLY |
+| HSCOPE | Scope Guard | [scope-guard.md](scope-guard.md) | SAME | NONE |
+| HDIAG | Diagnostic Only | [diagnostic-only.md](diagnostic-only.md) | EITHER | NONE |
+| HHISTORY | Safe History Analysis | [safe-historical-analysis.md](safe-historical-analysis.md) | EITHER | ARTIFACTS ONLY |
+| HEVAL | Construct Evaluator | [construct-evaluator.md](construct-evaluator.md) | EITHER | NONE |
+| HBENCH | Record Benchmark | [record-benchmark.md](record-benchmark.md) | NEW (or SAME) | ARTIFACTS ONLY |
+| HREVIEW | Independent Review Handoff | [independent-review-handoff.md](independent-review-handoff.md) | SAME | ARTIFACTS ONLY |
+| HNEXT | What Should I Do Next | [what-next.md](what-next.md) | EITHER | NONE |
 
-Helpers A and E are one prompt with two modes, and F and G share a file, to keep the manual workflow simple.
+## Conventions
 
-## Variables used in every helper
+- **The ID is a logical label, not a file path.** Each pasted helper begins with a short header (`HARNESS WORKFLOW`, helper ID, operation) so private Claude knows what it is without access to this repository. See [PROTOCOL.md](../PROTOCOL.md).
+- **Auto-detect first, ask second.** Helpers that act on "the current phase" find it from the private artifacts and workflow-state file. If Claude says it cannot, paste the optional `HARNESS CONTEXT` block from [PROMPT-CATALOG.md](../PROMPT-CATALOG.md#if-claude-cannot-tell-which-phase-you-mean).
+- **Private artifacts, not public files.** Helpers refer to the private artifact root (`AUDIT_DIR` in the major prompts), the workflow-state file (`STATE.md` or an existing equivalent) and `handoff/` files, never to files in this repository.
+- **Mutation levels.** "ARTIFACTS ONLY" means Claude may write under the private artifact root and nowhere else.
+- **Format of every helper:** title with ID, then **When to use / Session / Mutation / Placeholders to fill**, then one fenced `text` block.
 
-- `AUDIT_DIR`: the folder **outside every repository** where phase reports, handoffs and `STATUS.md` are kept. These files are local working material and may contain real identifiers; never commit them to a shared or public repository.
-- `PHASE`, `NEXT_PROMPT`, `TASK_ID` and similar: filled in by you each time, as described in the block.
-
-## Format of every helper
-
-```
-# Prompt Name
-**When to use:** ...
-**Session:** SAME / NEW / EITHER
-**Mutation:** NONE / ARTIFACTS ONLY / APPROVAL REQUIRED
-
-## Copy/Paste Prompt
-(one fenced text block)
-```
-
-"ARTIFACTS ONLY" means Claude may write under `AUDIT_DIR` and nowhere else.
+The phase table embedded in the helpers is kept in sync by hand; see the maintenance checklist in [PROTOCOL.md](../PROTOCOL.md#6-maintaining-the-protocol).
