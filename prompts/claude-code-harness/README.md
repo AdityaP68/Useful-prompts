@@ -99,6 +99,15 @@ Prefer a small surface, justified by repeated evidence.
 
 Run 10 once on the baseline (before 08) and again after 09's fixes are applied.
 
+## Operating it manually
+
+If you run these prompts by copying them from GitHub into Claude Code by hand, start with [RUNBOOK.md](RUNBOOK.md). It gives, for each major prompt, what must exist before you run it, which session to use, what to watch for, when it is done, and what to do next. It links to the major prompts rather than repeating them.
+
+- [RUNBOOK.md](RUNBOOK.md): step-by-step manual operation, session boundaries, the freeze / recovery-test gate between phases
+- [helpers/](helpers/README.md): short copy/paste prompts for the gaps between the major prompts (completeness check, freeze, recovery test, guardrails, and so on)
+- [LIFECYCLE.md](LIFECYCLE.md): prompt maturity (DRAFT / TESTED / PROVEN), how to change proven prompts, and how to track your own run status locally
+- [PROPOSED-CHANGES.md](PROPOSED-CHANGES.md): suggested edits to major prompts, not applied
+
 ## Shared conventions
 
 - `<AUDIT_DIR>`: a directory **outside every repository** where reports are saved (for example, a scratch directory in your home folder). Each prompt reads the previous reports from there. Reports are Markdown files named after their prompt (`01-inventory.md`, `02-history-findings.md`, ...).
